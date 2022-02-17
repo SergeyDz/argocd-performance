@@ -46,7 +46,6 @@ spec:
         helm:
           valueFiles:
           - values.yaml
-          - 'ci/values.{{app.destination.namespace}}.{{app.destination.region}}.yaml'
           parameters:
           - name: image.tag
             value: '{{app.version}}'
