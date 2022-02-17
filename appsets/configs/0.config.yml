@@ -1,0 +1,14 @@
+---
+app:
+  name: argo-perf-0
+  version: 0.1.0
+  component: sample
+  team: CICD
+  source:
+    repo: https://github.com/SergeyDz/argocd-performance.git
+    path: helm/argo-performance
+    branch: main
+  destination:
+    name: default
+    namespace: dev
+    region: us

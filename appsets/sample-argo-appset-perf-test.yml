@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: sample-argo-appset-perf-test
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    Product: DevOps
+    ProductComponents: sample 
+    Team: CICD
+    Region: us-east-1
+    Environment: dev
+    kind: appset
+    type: declarative
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/SergeyDz/argocd-performance.git
+      revision: main
+      files:
+      - path: "appsets/configs/**/*.config.yml"
+  template:
+    metadata:
+      name: '{{app.name}}-appset-{{app.destination.name}}-{{app.destination.namespace}}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
+      labels:
+        Product: DevOps
+        ProductComponents: '{{app.component}}'
+        Team: '{{app.team}}'
+        Region: '{{app.destination.region}}'
+        Environment: '{{app.destination.namespace}}'
+        kind: helm
+        type: declarative
+    spec:
+      project: argo-samples
+      destination:
+        namespace: '{{app.destination.namespace}}'
+        name: '{{app.destination.name}}'
+      source:
+        path: '{{app.source.path}}'
+        repoURL: '{{app.source.repo}}'
+        targetRevision: '{{app.source.branch}}'
+        helm:
+          valueFiles:
+          - values.yaml
+          - 'ci/values.{{app.destination.namespace}}.{{app.destination.region}}.yaml'
+          parameters:
+          - name: image.tag
+            value: '{{app.version}}'
+          - name: ingress.enabled
+            value: "false"
+          - name: nameOverride
+            value: $ARGOCD_APP_NAME
+      syncPolicy:
+        syncOptions:
+          - PrunePropagationPolicy=orphan
+
