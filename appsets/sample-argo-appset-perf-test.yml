@@ -17,7 +17,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/SergeyDz/argocd-performance.git
-      revision: main
+      revision: HEAD
       files:
       - path: "appsets/configs/**/*.config.yml"
   template:
