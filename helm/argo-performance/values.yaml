@@ -61,9 +61,11 @@ resources:
   limits:
     cpu: 10m
     memory: 32Mi
+    ephemeral-storage: 10Mi
   requests:
     cpu: 10m
     memory: 32Mi
+    ephemeral-storage: 10Mi
 
 autoscaling:
   enabled: false
