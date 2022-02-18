@@ -13,8 +13,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: appsets
-    repoURL: https://github.com/SergeyDz/argocd-performance
+    path: apps
+    repoURL: https://github.com/SergeyDz/argocd-performance.git
     targetRevision: HEAD
     directory:
       recurse: true
