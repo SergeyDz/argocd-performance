@@ -19,7 +19,7 @@ spec:
       - values.yaml
       parameters:
       - name: nameOverride
-        value: $ARGOCD_APP_NAME
+        value: argo-performance-45
   syncPolicy:
     automated: {}
     syncOptions: 
