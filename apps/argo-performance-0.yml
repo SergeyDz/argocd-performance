@@ -17,6 +17,9 @@ spec:
     helm:
       valueFiles:
       - values.yaml
+      parameters:
+      - name: nameOverride
+        value: $ARGOCD_APP_NAME
   syncPolicy:
     automated: {}
     syncOptions: 
