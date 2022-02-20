@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{name}}
+  name: argo-performance-in-cluster-0
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: dev
-    name: {{cluster}}
-  project: {{project}}
+    name: in-cluster
+  project: project-7
   source:
     path: helm/argo-performance
     repoURL: https://github.com/SergeyDz/argocd-performance.git
@@ -19,7 +19,7 @@ spec:
       - values.yaml
       parameters:
       - name: nameOverride
-        value: {{name}}
+        value: argo-performance-in-cluster-0
   syncPolicy:
     automated: {}
     syncOptions: 

@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{name}}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    Product: {{name}}
+    ProductComponents: ArgoProject
+    Environment: dev
+    kind: project
+    type: declarative
+spec:
+  description: Project for {{name}} Product.
+
+  sourceRepos:
+  - '*'
+
+  destinations:
+  - namespace: '*'
+    server: '*'
+
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: Namespace
+
+  roles:
+  - name: {{name}}-access
+    description: {{name}} access to the {{name}} project.
+    policies:
+    - p, proj:{{name}}:{{name}}-access, applications, *, {{name}}/*, allow
+    - p, proj:{{name}}:{{name}}-access, applications, create, {{name}}/*, deny
+    - p, proj:{{name}}:{{name}}-access, applications, update, {{name}}/*, deny
+    groups:
+    - {{name}}
+    - {{name}}-DevOps
+    - {{name}}-PreProd

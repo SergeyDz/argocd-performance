@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{name}}
+  name: argo-performance-gke-playgr-0
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: dev
-    name: {{cluster}}
-  project: {{project}}
+    name: gke_playground-s-11-8818bdd8_us-central1-c_cluster-1
+  project: project-1
   source:
     path: helm/argo-performance
     repoURL: https://github.com/SergeyDz/argocd-performance.git
@@ -19,7 +19,7 @@ spec:
       - values.yaml
       parameters:
       - name: nameOverride
-        value: {{name}}
+        value: argo-performance-gke-playgr-0
   syncPolicy:
     automated: {}
     syncOptions: 

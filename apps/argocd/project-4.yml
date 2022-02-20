@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: project-4
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    Product: project-4
+    ProductComponents: ArgoProject
+    Environment: dev
+    kind: project
+    type: declarative
+spec:
+  description: Project for project-4 Product.
+
+  sourceRepos:
+  - '*'
+
+  destinations:
+  - namespace: '*'
+    server: '*'
+
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: Namespace
+
+  roles:
+  - name: project-4-access
+    description: project-4 access to the project-4 project.
+    policies:
+    - p, proj:project-4:project-4-access, applications, *, project-4/*, allow
+    - p, proj:project-4:project-4-access, applications, create, project-4/*, deny
+    - p, proj:project-4:project-4-access, applications, update, project-4/*, deny
+    groups:
+    - project-4
+    - project-4-DevOps
+    - project-4-PreProd
