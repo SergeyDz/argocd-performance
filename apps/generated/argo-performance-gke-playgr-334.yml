@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: dev
     name: gke_playground-s-11-8818bdd8_us-central1-c_cluster-1
-  project: project-28
+  project: project-7
   source:
     path: helm/argo-performance
     repoURL: https://github.com/SergeyDz/argocd-performance.git
