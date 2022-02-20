@@ -2,7 +2,7 @@ def main():
     f = open("./templates/app.template")
     template = f.read()
 
-    for i in range(1500):
+    for i in range(200):
         name = "argo-performance-" + str(i)
         result = template.replace("{{name}}", name)
         target = open("./apps/" + name + ".yml", "w+")
