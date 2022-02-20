@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: project-14
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  labels:
+    Product: project-14
+    ProductComponents: ArgoProject
+    Environment: dev
+    kind: project
+    type: declarative
+spec:
+  description: Project for project-14 Product.
+
+  sourceRepos:
+  - '*'
+
+  destinations:
+  - namespace: '*'
+    server: '*'
+  
+  syncWindows:
+  - duration: 24h
+    kind: deny
+    schedule: 0 0 * * *
+    namespaces:
+    - '*'
+    applications:
+    - '*'
+    clusters:
+    - '*'
+
+  clusterResourceWhitelist:
+  - group: "*"
+    kind: Namespace
+
+  roles:
+  - name: project-14-access
+    description: project-14 access to the project-14 project.
+    policies:
+    - p, proj:project-14:project-14-access, applications, *, project-14/*, allow
+    - p, proj:project-14:project-14-access, applications, create, project-14/*, deny
+    - p, proj:project-14:project-14-access, applications, update, project-14/*, deny
+    groups:
+    - project-14
+    - project-14-DevOps
+    - project-14-PreProd
