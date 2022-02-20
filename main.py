@@ -5,10 +5,11 @@ def main():
 def generate(n, cluster): 
     f = open("./templates/app.template")
     template = f.read()
+    target = cluster[0:10]
 
     for i in range(n):
-        name = "argo-performance-" + cluster + "-" + str(i)
-        result = template.replace("{{name}}", name).replace("{{cluster}}", cluster)
+        name = "argo-performance-" + target + "-" + str(i)
+        result = template.replace("{{name}}", name).replace("{{cluster}}", target)
         target = open("./apps/" + name + ".yml", "w+")
         target.write(result)
         target.close()
