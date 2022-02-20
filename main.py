@@ -13,7 +13,7 @@ def generate(n, cluster):
     for i in range(n):
         j = randrange(30)
         name = "argo-performance-" + clusterName + "-" + str(i)
-        result = template.replace("{{name}}", name).replace("{{cluster}}", cluster).replace("{{project}}", "project-" + str(j))
+        result = template.replace("{{name}}", name).replace("{{cluster}}", cluster).replace("{{project}}", "default")
         target = open("./apps/generated/" + name + ".yml", "w+")
         target.write(result)
         target.close()
