@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-performance-gke_playground-s-11-4b203270_us-central1-c_cluster-1-5
+  name: argo-performance-gke-playgr-0
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -19,7 +19,7 @@ spec:
       - values.yaml
       parameters:
       - name: nameOverride
-        value: argo-performance-gke_playground-s-11-4b203270_us-central1-c_cluster-1-5
+        value: argo-performance-gke-playgr-0
   syncPolicy:
     automated: {}
     syncOptions: 
