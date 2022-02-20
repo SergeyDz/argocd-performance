@@ -2,7 +2,7 @@ from random import randrange
 
 def main(): 
     projects(10)
-    generate(2, "in-cluster")
+    generate(200, "in-cluster")
     generate(2, "gke_playground-s-11-8818bdd8_us-central1-c_cluster-1")
 
 def generate(n, cluster): 
