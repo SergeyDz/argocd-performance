@@ -1,7 +1,8 @@
 def main(): 
-    default(200, "in-cluster")
+    generate(200, "in-cluster")
+    generate(200, "gke_playground-s-11-4b203270_us-central1-c_cluster-1")
 
-def default(n, cluster): 
+def generate(n, cluster): 
     f = open("./templates/app.template")
     template = f.read()
 
