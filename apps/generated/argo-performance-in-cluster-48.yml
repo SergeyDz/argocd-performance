@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: dev
     name: in-cluster
-  project: project-15
+  project: project-23
   source:
     path: helm/argo-performance
     repoURL: https://github.com/SergeyDz/argocd-performance.git
